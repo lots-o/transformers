@@ -460,4 +460,5 @@ jobs:
       job: ${{ inputs.job }}
       setup_status: ${{ needs.setup.result }}
       env_name_for_slack_report_channel: ${{ inputs.env_name_for_slack_report_channel }}
+      folder_slices: ${{ needs.setup.outputs.folder_slices }}
     secrets: inherit

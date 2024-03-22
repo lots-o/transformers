@@ -860,7 +860,6 @@ if __name__ == "__main__":
 
     print(sys.argv)
 
-
     arguments = sys.argv[1:]
     if len(arguments) == 0:
         models = []
