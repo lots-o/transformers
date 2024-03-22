@@ -458,6 +458,6 @@ jobs:
     uses: ./.github/workflows/slack-report.yml
     with:
       job: ${{ inputs.job }}
-      setup_status: {{ needs.setup.result }}
+      setup_status: ${{ needs.setup.result }}
       env_name_for_slack_report_channel: ${{ inputs.env_name_for_slack_report_channel }}
     secrets: inherit
