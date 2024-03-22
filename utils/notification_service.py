@@ -854,7 +854,7 @@ def prepare_reports(title, header, reports, to_truncate=True):
 if __name__ == "__main__":
 
     ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
-    CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
+    CI_SLACK_REPORT_CHANNEL_ID = os.environ[ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID]
     print(ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID)
     print(CI_SLACK_REPORT_CHANNEL_ID[:4])
 
