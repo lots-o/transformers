@@ -9,6 +9,9 @@ on:
       env_name_for_slack_report_channel:
         required: true
         type: string
+      setup_status:
+        required: true
+        type: string
 
 
 jobs:
@@ -21,7 +24,7 @@ jobs:
         shell: bash
         # For the meaning of these environment variables, see the job `Setup`
         run: |
-          echo "Setup status: ${{ needs.setup.result }}"
+          echo "Setup status: ${{ inputs.setup_status }}"
 
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
@@ -36,7 +39,7 @@ jobs:
           CI_EVENT: scheduled
           CI_SHA: ${{ github.sha }}
           CI_WORKFLOW_REF: ${{ github.workflow_ref }}
-          # SETUP_STATUS: ${{ needs.setup.result }}
+          SETUP_STATUS: ${{ inputs.setup_status }}
         # We pass `needs.setup.outputs.matrix` as the argument. A processing in `notification_service.py` to change
         # `models/bert` to `models_bert` is required, as the artifact names use `_` instead of `/`.
         run: |

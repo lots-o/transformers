@@ -855,8 +855,12 @@ if __name__ == "__main__":
 
     ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
     CI_SLACK_REPORT_CHANNEL_ID = os.environ[ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID]
-    print(ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID)
-    print(CI_SLACK_REPORT_CHANNEL_ID[:4])
+
+    setup_status = os.environ.get("SETUP_STATUS")
+    print(type(setup_status))
+    print(len(setup_status))
+    print(setup_status)
+    exit(0)
 
     # runner_status = os.environ.get("RUNNER_STATUS")
     # runner_env_status = os.environ.get("RUNNER_ENV_STATUS")
