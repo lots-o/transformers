@@ -858,12 +858,16 @@ if __name__ == "__main__":
     # print(len(setup_status))
     # print(setup_status)
 
+    print(sys.argv)
+
+
     arguments = sys.argv[1:]
     if len(arguments) == 0:
         models = []
         print(models)
     else:
         model_list_as_str = arguments[0]
+        print(model_list_as_str)
         try:
             folder_slices = ast.literal_eval(model_list_as_str)
             # Need to change from elements like `models/bert` to `models_bert` (the ones used as artifact names).
