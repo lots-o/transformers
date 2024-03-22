@@ -853,14 +853,13 @@ def prepare_reports(title, header, reports, to_truncate=True):
 
 if __name__ == "__main__":
 
+    # setup_status = os.environ.get("SETUP_STATUS")
+    # print(type(setup_status))
+    # print(len(setup_status))
+    # print(setup_status)
+
     ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
     CI_SLACK_REPORT_CHANNEL_ID = os.environ[ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID]
-
-    setup_status = os.environ.get("SETUP_STATUS")
-    print(type(setup_status))
-    print(len(setup_status))
-    print(setup_status)
-    exit(0)
 
     # runner_status = os.environ.get("RUNNER_STATUS")
     # runner_env_status = os.environ.get("RUNNER_ENV_STATUS")
@@ -871,7 +870,7 @@ if __name__ == "__main__":
     # Let's keep the lines regardig runners' status (we might be able to use them again in the future)
     runner_not_available = False
     runner_failed = False
-    setup_failed = True if setup_status is not None and setup_status != "success" else False
+    setup_failed = False if setup_status in ["skipped", "success"] else True
 
     org = "huggingface"
     repo = "transformers"
