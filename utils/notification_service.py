@@ -934,7 +934,7 @@ if __name__ == "__main__":
         exit(0)
 
     arguments = sys.argv[1:]
-    if len(arguments) == 0:
+    if len(arguments) == 0 or arguments[0] == "":
         models = []
     else:
         model_list_as_str = arguments[0]
