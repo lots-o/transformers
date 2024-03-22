@@ -858,6 +858,24 @@ if __name__ == "__main__":
     # print(len(setup_status))
     # print(setup_status)
 
+    arguments = sys.argv[1:]
+    if len(arguments) == 0:
+        models = []
+        print(models)
+    else:
+        model_list_as_str = arguments[0]
+        try:
+            folder_slices = ast.literal_eval(model_list_as_str)
+            # Need to change from elements like `models/bert` to `models_bert` (the ones used as artifact names).
+            models = [x.replace("models/", "models_") for folders in folder_slices for x in folders]
+            print(models)
+        except:
+            pass
+
+    exit(0)
+
+
+
     ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
     CI_SLACK_REPORT_CHANNEL_ID = os.environ[ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID]
 
@@ -938,14 +956,18 @@ if __name__ == "__main__":
         Message.error_out(title, ci_title, runner_not_available, runner_failed, setup_failed)
         exit(0)
 
-    arguments = sys.argv[1:][0]
-    try:
-        folder_slices = ast.literal_eval(arguments)
-        # Need to change from elements like `models/bert` to `models_bert` (the ones used as artifact names).
-        models = [x.replace("models/", "models_") for folders in folder_slices for x in folders]
-    except SyntaxError:
-        Message.error_out(title, ci_title)
-        raise ValueError("Errored out.")
+    arguments = sys.argv[1:]
+    if len(arguments) == 0:
+        models = []
+    else:
+        model_list_as_str = arguments[0]
+        try:
+            folder_slices = ast.literal_eval(model_list_as_str)
+            # Need to change from elements like `models/bert` to `models_bert` (the ones used as artifact names).
+            models = [x.replace("models/", "models_") for folders in folder_slices for x in folders]
+        except SyntaxError:
+            Message.error_out(title, ci_title)
+            raise ValueError("Errored out.")
 
     github_actions_jobs = get_jobs(
         workflow_run_id=os.environ["GITHUB_RUN_ID"], token=os.environ["ACCESS_REPO_INFO_TOKEN"]
