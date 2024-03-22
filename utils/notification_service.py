@@ -573,7 +573,7 @@ class Message:
         print(json.dumps({"blocks": blocks}))
 
         client.chat_postMessage(
-            channel=os.environ["CI_SLACK_REPORT_CHANNEL_ID"],
+            channel=CI_SLACK_REPORT_CHANNEL_ID,
             text=text,
             blocks=payload,
         )
@@ -586,7 +586,7 @@ class Message:
         text = f"{self.n_failures} failures out of {self.n_tests} tests," if self.n_failures else "All tests passed."
 
         self.thread_ts = client.chat_postMessage(
-            channel=os.environ["CI_SLACK_REPORT_CHANNEL_ID"],
+            channel=CI_SLACK_REPORT_CHANNEL_ID,
             blocks=payload,
             text=text,
         )
@@ -712,7 +712,7 @@ class Message:
                     print(json.dumps({"blocks": blocks}))
 
                     client.chat_postMessage(
-                        channel=os.environ["CI_SLACK_REPORT_CHANNEL_ID"],
+                        channel=CI_SLACK_REPORT_CHANNEL_ID,
                         text=f"Results for {job}",
                         blocks=blocks,
                         thread_ts=self.thread_ts["ts"],
@@ -735,7 +735,7 @@ class Message:
                     print(json.dumps({"blocks": blocks}))
 
                     client.chat_postMessage(
-                        channel=os.environ["CI_SLACK_REPORT_CHANNEL_ID"],
+                        channel=CI_SLACK_REPORT_CHANNEL_ID,
                         text=f"Results for {job}",
                         blocks=blocks,
                         thread_ts=self.thread_ts["ts"],
@@ -749,7 +749,7 @@ class Message:
             print(json.dumps({"blocks": blocks}))
 
             client.chat_postMessage(
-                channel=os.environ["CI_SLACK_REPORT_CHANNEL_ID"],
+                channel=CI_SLACK_REPORT_CHANNEL_ID,
                 text="Results for new failures",
                 blocks=blocks,
                 thread_ts=self.thread_ts["ts"],
@@ -853,11 +853,10 @@ def prepare_reports(title, header, reports, to_truncate=True):
 
 if __name__ == "__main__":
 
-    a = os.environ["CI_SLACK_REPORT_CHANNEL_ID"]
-    b = os.environ[a]
-    print(a)
-    print(b[:4])
-    exit(0)
+    ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
+    CI_SLACK_REPORT_CHANNEL_ID = os.environ["ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID"]
+    print(ENV_NAME_FOR_CI_SLACK_REPORT_CHANNEL_ID)
+    print(CI_SLACK_REPORT_CHANNEL_ID[:4])
 
     # runner_status = os.environ.get("RUNNER_STATUS")
     # runner_env_status = os.environ.get("RUNNER_ENV_STATUS")

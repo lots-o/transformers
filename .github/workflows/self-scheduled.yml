@@ -12,7 +12,7 @@ on:
       job:
         required: true
         type: string
-      channel:
+      env_name_for_slack_report_channel:
         required: true
         type: string
 
@@ -61,12 +61,6 @@ jobs:
       - name: Show installed libraries and their versions
         working-directory: /transformers
         run: pip freeze
-
-      - id: check
-        name: check
-        working-directory: /transformers/tests
-        run: |
-          python3 ../utils/split_model_tests_2.py
 
       - id: set-matrix
         name: Identify models to test
@@ -464,5 +458,5 @@ jobs:
     uses: ./.github/workflows/slack-report.yml
     with:
       job: ${{ inputs.job }}
-      channel: ${{ inputs.channel }}
+      env_name_for_slack_report_channel: ${{ inputs.env_name_for_slack_report_channel }}
     secrets: inherit
