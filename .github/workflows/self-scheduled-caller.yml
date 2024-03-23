@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/self-scheduled.yml
     with:
       job: run_tests_gpu
-      env_name_for_slack_report_channel: CI_SLACK_CHANNEL_ID_DAILY
+      env_name_for_slack_report_channel: CI_SLACK_CHANNEL_DUMMY_TESTS
     secrets: inherit
 
 

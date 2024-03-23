@@ -1064,6 +1064,11 @@ if __name__ == "__main__":
     elif ci_event.startswith("Push CI (AMD)"):
         additional_files = {}
 
+    job_name = os.getenv("CI_TEST_JOB")
+
+    if job_name != "run_tests_quantization_torch_gpu" and "Quantization tests" in additional_files:
+        del additional_files["Quantization tests"]
+
     additional_results = {
         key: {
             "failed": {"unclassified": 0, "single": 0, "multi": 0},
