@@ -1046,6 +1046,13 @@ if __name__ == "__main__":
                             unclassified_model_failures.append(line)
 
     # Additional runs
+    job_to_test_map = {
+        # "": "Examples directory",
+        # "": "PyTorch pipelines",
+        # "": "TensorFlow pipelines",
+        # "": "Torch CUDA extension tests",
+        "run_tests_quantization_torch_gpu": "Quantization tests",
+    }
     additional_files = {
         "Examples directory": "run_examples_gpu",
         "PyTorch pipelines": "run_tests_torch_pipeline_gpu",
@@ -1065,9 +1072,9 @@ if __name__ == "__main__":
         additional_files = {}
 
     job_name = os.getenv("CI_TEST_JOB")
+    test_name = job_to_test_map[job_name]
 
-    if job_name != "run_tests_quantization_torch_gpu" and "Quantization tests" in additional_files:
-        del additional_files["Quantization tests"]
+    additional_files = {k: v for k, v in additional_files.items() if k == test_name}
 
     additional_results = {
         key: {
