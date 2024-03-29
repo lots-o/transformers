@@ -126,7 +126,11 @@ def load_tf_weights_in_albert(model, config, tf_checkpoint_path):
         # Naming was changed to be more explicit
         name = name.replace("embeddings/attention", "embeddings")
         name = name.replace("inner_group_", "albert_layers/")
-        name = name.replace("group_", "albert_layer_groups/")
+        ##################
+        #NOTE:
+        # name = name.replace("group_", "albert_layer_groups/")
+        name = re.sub(r"\/group_([0-9])([_0-9]*)", r"/albert_layer_groups/\1", name)
+        ################
 
         # Classifier
         if len(name.split("/")) == 1 and ("output_bias" in name or "output_weights" in name):
